@@ -18,6 +18,20 @@
     <custom-style>
       <style include="lumo-color lumo-typography"></style>
     </custom-style>
+
+    <!-- Declare an web app manifest and register a Service Worker -->
+    <link sizes="16x16" rel="shortcut icon" href="my-icons/icon-16x16.png" type="image/png">
+    <link rel="manifest" href="my-manifest.webmanifest">
+    <script>
+      // Check that service workers are supported
+      if ('serviceWorker' in navigator) {
+        // Use the window load event to keep the page load performant
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('my-sw.js');
+        });
+      }
+    </script>
+
     <!-- index.ts is included here automatically (either by the dev server or during the build) -->
   </head>
 
