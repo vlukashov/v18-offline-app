@@ -33,7 +33,7 @@ const routes = [
         }
       },
       {
-        path: 'master-detail',
+        path: 'views/master-detail',
         component: 'master-detail-view',
         action: async () => {
           await import ('./views/masterdetail/master-detail-view');

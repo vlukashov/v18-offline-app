@@ -7,7 +7,7 @@
  */
 const merge = require('webpack-merge');
 const flowDefaults = require('./webpack.generated.js');
-const { GenerateSW } = require('workbox-webpack-plugin');
+const { InjectManifest } = require('workbox-webpack-plugin');
 const glob = require('glob');
 const crypto = require('crypto');
 const path = require('path');
@@ -73,14 +73,15 @@ module.exports = merge(flowDefaults,
   // },
   {
     plugins: [
-      new GenerateSW({
+      new InjectManifest({
+        // Vaadin apps should generate as few as possible 'extra' files in the project folder.
+        // There should be no `sw.js` file in the project if its content is fully auto-generated.
+        // There should still be a way for developers to add their own sw.js file to customise the Vaadin defaults.
+        // TODO: find a way to avoid generating the sw.js file
+        swSrc: path.resolve(__dirname, 'sw.js'),
         swDest: 'build/sw.js',
-        clientsClaim: true,
-        skipWaiting: true,
         manifestTransforms: [manifestTransform],
         maximumFileSizeToCacheInBytes: 100 * 1024 * 1024,
-        navigateFallback: 'index.html',
-        inlineWorkboxRuntime: true
       }),
     ]
   },
