@@ -7,10 +7,13 @@ import java.util.List;
 import com.vaadin.flow.server.connect.Endpoint;
 import com.vaadin.flow.server.connect.auth.AnonymousAllowed;
 
+import javax.persistence.Cacheable;
+
 /**
  * The endpoint for the client-side Dashboard View.
  */
 @Endpoint
+@Cacheable
 @AnonymousAllowed
 public class DashboardEndpoint {
 

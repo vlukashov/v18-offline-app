@@ -1,6 +1,7 @@
 import {skipWaiting, clientsClaim} from 'workbox-core';
 import {precacheAndRoute, createHandlerBoundToURL} from 'workbox-precaching';
 import {NavigationRoute, registerRoute} from 'workbox-routing';
+import {CacheableEndpoint} from './CacheableEndpoint';
 
 skipWaiting();
 clientsClaim();
@@ -30,5 +31,7 @@ const myHandler = async ({url}) => {
 
 const navigationRoute = new NavigationRoute(myHandler);
 registerRoute(navigationRoute);
+
+registerRoute(/\/connect\/DashboardEndpoint\/.*/, new CacheableEndpoint(), 'POST');
 
 // registerRoute(new NavigationRoute(createHandlerBoundToURL('/index.html')));
